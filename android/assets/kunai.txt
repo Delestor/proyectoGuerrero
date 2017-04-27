@@ -1,0 +1,12 @@
+kunai.png
+size: 160, 32
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Kunai
+  rotate: false
+  xy: 0, 0
+  size: 160, 32
+  orig: 160, 32
+  offset: 0, 0
+  index: -1

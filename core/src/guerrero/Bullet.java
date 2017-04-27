@@ -2,6 +2,7 @@ package guerrero;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -16,7 +17,7 @@ import bemen3.cat.ActGuerreros;
 /**
  * Created by Albert on 25/04/2017.
  */
-public class FireBall extends Sprite {
+public class Bullet extends Sprite {
 
     Pantalla pantalla;
     World world;
@@ -28,17 +29,19 @@ public class FireBall extends Sprite {
     boolean fireRight;
 
     Body b2body;
-    public FireBall(Pantalla pantalla, float x, float y, boolean fireRight){
+    public Bullet(Pantalla pantalla, float x, float y, boolean fireRight){
         this.fireRight = fireRight;
         this.pantalla = pantalla;
         this.world = pantalla.getWorld();
         frames = new Array<TextureRegion>();
-        for(int i = 21; i < 24; i++){
-            frames.add(new TextureRegion(pantalla.getAtlas().findRegion("caminar"), i * 19, 0, 17, 18));
-        }
+
+        TextureAtlas atlasKunai = new TextureAtlas("kunai.txt");
+
+        frames.add(new TextureRegion(atlasKunai.findRegion("Kunai")));
+
         fireAnimation = new Animation(0.2f, frames);
         setRegion((TextureRegion) fireAnimation.getKeyFrame(0));
-        setBounds(x, y, 6 / ActGuerreros.PPM, 6 / ActGuerreros.PPM);
+        setBounds(x, y, 12 / ActGuerreros.PPM, 12 / ActGuerreros.PPM);
         defineFireBall();
     }
 

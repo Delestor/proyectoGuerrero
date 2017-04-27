@@ -15,6 +15,7 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.badlogic.gdx.InputProcessor;
 
 import bemen3.cat.ActGuerreros;
 
@@ -22,7 +23,7 @@ import bemen3.cat.ActGuerreros;
  * Created by Albert on 25/04/2017.
  */
 
-public class Pantalla implements Screen {
+public class Pantalla implements Screen, InputProcessor {
 
     private ActGuerreros juego;
     private TextureAtlas atlas;
@@ -86,6 +87,73 @@ public class Pantalla implements Screen {
                 player.fire();
         }
 
+    }
+
+    @Override
+    public boolean keyDown(int keycode) {
+        return false;
+    }
+
+    @Override
+    public boolean keyUp(int keycode) {
+        return false;
+    }
+
+    @Override
+    public boolean keyTyped(char character) {
+        return false;
+    }
+
+    public boolean touchDown (int x, int y, int pointer, int button){
+		/*
+		System.out.println("Pulsado con el dedo");
+		System.out.println("Pulsado en X = "+x);
+		System.out.println("Pulsado en Y = "+y);
+		System.out.println("Pos x = "+castillo.getJabato().getPosicion().x);
+		System.out.println("Pos y = "+castillo.getJabato().getPosicion().y);*/
+        //prepararSaltoJabato();
+        if(x<Gdx.graphics.getWidth()/2 && y< Gdx.graphics.getHeight()/3){
+            player.saltar();
+            System.out.println("Salto");
+        }else {
+            if (x < Gdx.graphics.getWidth() / 2 && y > Gdx.graphics.getHeight() / 2){
+                player.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), player.b2body.getWorldCenter(), true);
+                System.out.println("Izquierda");
+            }
+
+            if (x > Gdx.graphics.getWidth() / 2 && y > Gdx.graphics.getHeight() / 2){
+                player.b2body.applyLinearImpulse(new Vector2(0.1f, 0), player.b2body.getWorldCenter(), true);
+                System.out.println("Derecha");
+            }
+
+        }
+        //if (x-ancho<castillo.getJabato().getPosicion().x && y-alto> castillo.getJabato().getPosicion().y) controlador.izquierdaPulsada();
+        //if (x-ancho>castillo.getJabato().getPosicion().x && y-alto> castillo.getJabato().getPosicion().y) controlador.derechaPulsada();
+        return true;
+    }
+
+    public boolean touchUp (int x, int y, int pointer, int button){
+        //System.out.println("Dejando de pulsar con el dedo");
+        //if (x<pintor.ancho/2 && y> pintor.alto/2) controlador.izquierdaLiberada();
+        //if (x>pintor.ancho/2 && y> pintor.alto/2) controlador.derechaLiberada();
+        //controlador.izquierdaLiberada();
+        //controlador.derechaLiberada();
+        return true;
+    }
+
+    @Override
+    public boolean touchDragged(int screenX, int screenY, int pointer) {
+        return false;
+    }
+
+    @Override
+    public boolean mouseMoved(int screenX, int screenY) {
+        return false;
+    }
+
+    @Override
+    public boolean scrolled(int amount) {
+        return false;
     }
 
     @Override

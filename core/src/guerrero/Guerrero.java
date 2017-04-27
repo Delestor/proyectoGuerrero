@@ -1,6 +1,5 @@
 package guerrero;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -16,7 +15,6 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.graphics.Texture;
 
 import bemen3.cat.ActGuerreros;
 
@@ -44,7 +42,7 @@ public class Guerrero extends Sprite{
     private boolean guerreroIsDead;
 
     private Pantalla pantalla;
-    private Array<FireBall> fireballs;
+    private Array<Bullet> fireballs;
 
     public Guerrero(Pantalla pantalla) {
         this.pantalla = pantalla;
@@ -89,7 +87,7 @@ public class Guerrero extends Sprite{
         definePlayer();
         setBounds(0, 0, 24 / ActGuerreros.PPM, 24 / ActGuerreros.PPM);
         //setRegion(guerreroStand);
-        fireballs = new Array<FireBall>();
+        fireballs = new Array<Bullet>();
 
     }
     public TextureRegion getFrame(float dt){
@@ -150,7 +148,7 @@ public class Guerrero extends Sprite{
         if(timeToRedefineGuerrero){
             redefinePlayer();
         }
-        for(FireBall  ball : fireballs) {
+        for(Bullet ball : fireballs) {
             ball.update(dt);
             if(ball.isDestroyed())
                 fireballs.removeValue(ball, true);
@@ -243,7 +241,7 @@ public class Guerrero extends Sprite{
         b2body.createFixture(fdef).setUserData(this);
     }
     public void fire(){
-        fireballs.add(new FireBall(pantalla, b2body.getPosition().x, b2body.getPosition().y, runningRight ? true : false));
+        fireballs.add(new Bullet(pantalla, b2body.getPosition().x, b2body.getPosition().y, runningRight ? true : false));
     }
     public boolean isDead(){
         return guerreroIsDead;
@@ -251,8 +249,14 @@ public class Guerrero extends Sprite{
 
     public void draw(Batch batch){
         super.draw(batch);
-        for(FireBall ball : fireballs) {
-            ball.draw(batch);
+        int count = 0;
+        for(Bullet ball : fireballs) {
+            if(count > 3){
+                System.out.println("MAS  De 3333333333333333333333");
+                ball.setToDestroy();
+            }else
+                ball.draw(batch);
+            count++;
         }
     }
 

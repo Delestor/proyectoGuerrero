@@ -50,9 +50,9 @@ public class WorldContactListener implements ContactListener {
                 break;
             case ActGuerreros.DISPARO_BIT | ActGuerreros.OBJECT_BIT:
                 if(fixA.getFilterData().categoryBits == ActGuerreros.DISPARO_BIT)
-                    ((FireBall)fixA.getUserData()).setToDestroy();
+                    ((Bullet)fixA.getUserData()).setToDestroy();
                 else
-                    ((FireBall)fixB.getUserData()).setToDestroy();
+                    ((Bullet)fixB.getUserData()).setToDestroy();
                 break;
         }
     }

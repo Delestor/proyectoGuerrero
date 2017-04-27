@@ -28,7 +28,7 @@ public class B2WorldCreator {
         FixtureDef fdef = new FixtureDef();
         Body body;
 
-        for(MapObject object : map.getLayers().get(0).getObjects().getByType(RectangleMapObject.class)){
+        for(MapObject object : map.getLayers().get("suelo").getObjects().getByType(RectangleMapObject.class)){
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
             bdef.type = BodyDef.BodyType.StaticBody;
