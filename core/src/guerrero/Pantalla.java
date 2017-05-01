@@ -27,6 +27,7 @@ public class Pantalla implements Screen, InputProcessor {
 
     private ActGuerreros juego;
     private TextureAtlas atlas;
+    private TextureAtlas atlasRobot;
     public static boolean alreadyDestroyed = false;
 
     private OrthographicCamera gamecam;
@@ -47,10 +48,12 @@ public class Pantalla implements Screen, InputProcessor {
     private Guerrero player;
 
 
-    private Music music;
+    private Music music=  Gdx.audio.newMusic(Gdx.files.internal("sonic.mp3"));
 
     public Pantalla(ActGuerreros juego) {
         //atlas = new TextureAtlas("mario_and_enemies.pack");
+        music.play();
+        atlasRobot = new TextureAtlas("robot.txt");
         this.juego = juego;
         gamecam = new OrthographicCamera();
         gamePort = new FitViewport(ActGuerreros.V_WIDTH / ActGuerreros.PPM, ActGuerreros.V_HEIGHT / ActGuerreros.PPM, gamecam);
@@ -112,6 +115,7 @@ public class Pantalla implements Screen, InputProcessor {
 		System.out.println("Pos x = "+castillo.getJabato().getPosicion().x);
 		System.out.println("Pos y = "+castillo.getJabato().getPosicion().y);*/
         //prepararSaltoJabato();
+        System.out.println("Touch Down");
         if(x<Gdx.graphics.getWidth()/2 && y< Gdx.graphics.getHeight()/3){
             player.saltar();
             System.out.println("Salto");
@@ -251,4 +255,7 @@ public class Pantalla implements Screen, InputProcessor {
         //hud.dispose();
     }
     /*public Hud getHud(){ return hud; }*/
+    public TextureAtlas getAtlasRobot(){
+        return this.atlasRobot;
+    }
 }

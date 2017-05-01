@@ -17,6 +17,7 @@ import bemen3.cat.ActGuerreros;
  * Created by Albert on 25/04/2017.
  */
 public class B2WorldCreator {
+    private Array<Robot> robots;
     //private Array<Goomba> goombas;
 
     public B2WorldCreator(Pantalla pantalla){
@@ -40,7 +41,7 @@ public class B2WorldCreator {
             fdef.shape = shape;
             body.createFixture(fdef);
         }
-
+        /*
         for(MapObject object : map.getLayers().get(1).getObjects().getByType(RectangleMapObject.class)){
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
@@ -53,20 +54,20 @@ public class B2WorldCreator {
             fdef.shape = shape;
             fdef.filter.categoryBits = ActGuerreros.OBJECT_BIT;
             body.createFixture(fdef);
-        }
-        /*goombas = new Array<Goomba>();
-        for(MapObject object : map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class)){
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            goombas.add(new Goomba(pantalla, rect.getX() / ActGuerreros.PPM, rect.getY() / ActGuerreros.PPM));
         }*/
+        robots = new Array<Robot>();
+        for(MapObject object : map.getLayers().get("robots").getObjects().getByType(RectangleMapObject.class)){
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            robots.add(new Robot(pantalla, rect.getX() / ActGuerreros.PPM, rect.getY() / ActGuerreros.PPM));
+        }
     }
-    /*public Array<Goomba> getGoombas() {
-        return goombas;
-    }*/
+    public Array<Robot> getRobots() {
+        return robots;
+    }
 
     public Array<Enemigo> getEnemies(){
         Array<Enemigo> enemies = new Array<Enemigo>();
-        //enemies.addAll(goombas);
+        enemies.addAll(robots);
         return enemies;
     }
 }

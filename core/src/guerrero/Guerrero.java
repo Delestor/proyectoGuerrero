@@ -57,7 +57,6 @@ public class Guerrero extends Sprite{
         //new TextureRegion(pantalla.getAtlas().findRegion("pie"), i * 65, 0, 65, 65)
         //Animacion estar de pie
 
-        String raizAtlasGuerrero = "guerrero/";
 
         TextureAtlas atlasIdle = new TextureAtlas("idle.txt");
 
